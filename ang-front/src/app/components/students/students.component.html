@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Datos del estudiante</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <!-- Import Google Icon Font -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col s5">
+                <div class="card">
+                    <div class="card-content">
+                        <form #studentFrom="ngForm" (ngSubmit)="addStudent(studentFrom)">
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <input type="text" name="name" #name="ngModel"
+                                        [ngModel]="studentService.selectedStudent.name" placeholder="Entre un nombre">
+                                    <input type="text" name="surname" #name="ngModel"
+                                        [(ngModel)]="studentService.selectedStudent.surname"
+                                        placeholder="Entre otro nombre">
+                                </div>
+                                <div class="card-action">
+                                    <div class="input-field col s12">
+                                        <button class="btn right" (click)="resetForm(studentFrom)">Clean</button>
+                                        <button class="btn right" style="margin-right:2px">Save</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-s7">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Surname</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let student of studentService.students">
+                            <td>{{student.name}}</td>
+                            <td>{{student.surname}}</td>
+                            <input type="hidden" name='_id' #_id="ngModel"
+                            [(ngModel)]="studentService.selectedStudent._id">                            
+                            <td (click)="editStudent(student)"><i class="material-icons">edit</i></td>
+                            <td (click)="deleteStudent(student._id)"><i class="material-icons">delete</i></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <p>Estudiantes funcionando!</p>
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+</body>
+
+</html>
